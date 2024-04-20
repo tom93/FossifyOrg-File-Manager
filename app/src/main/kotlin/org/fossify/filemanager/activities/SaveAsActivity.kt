@@ -40,6 +40,13 @@ class SaveAsActivity : SimpleActivity() {
                             val mimeType = contentResolver.getType(source) ?: intent.getType()?.takeIf { it != "*/*" } ?: filename.getMimeType()
                             val inputStream = contentResolver.openInputStream(source)
 
+                            System.err.println("XXX source.toString() = \"${source.toString()}\"")
+                            System.err.println("XXX source.toString().getFilenameFromPath() = \"${source.toString().getFilenameFromPath()}\"")
+                            System.err.println("XXX getFilenameFromContentUri(source) = \"${getFilenameFromContentUri(source)}\"")
+                            System.err.println("XXX contentResolver.getType(source) = \"${contentResolver.getType(source)}\"")
+                            System.err.println("XXX intent.getType() = \"${intent.getType()}\"")
+                            System.err.println("XXX filename.getMimeType() = \"${filename.getMimeType()}\"")
+
                             val destinationPath = "$destination/$filename"
                             val outputStream = getFileOutputStreamSync(destinationPath, mimeType, null)!!
                             inputStream!!.copyTo(outputStream)
